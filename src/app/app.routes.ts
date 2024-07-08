@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { HomePageComponent } from '@modules/home/pages/home-page/home-page.component';
 // import { ExampleComponent } from './example/example.component';
 
 export const routes: Routes = [
@@ -7,8 +8,12 @@ export const routes: Routes = [
   //   component: ExampleComponent
   // }
   {
+    path: 'auth',
+    loadChildren: () => import('./modules/auth/auth.module').then(module => module.AuthModule)
+  },
+  {
     path: '', //en ruta raiz '/'
-    //component: 
+    component: HomePageComponent,
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
   }
 ];
