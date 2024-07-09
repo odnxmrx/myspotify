@@ -12,4 +12,17 @@ import { GenericSectionComponent } from '@shared/components/generic-section/gene
 })
 export class TracksPageComponent {
 
+  //temp mock for tracks - despues vendra de API
+  mockTracksList = [
+    {
+      name: 'Girl so confusing'
+    },
+    {
+      name: 'Girl so confusing'
+    },
+    {
+      name: 'Girl so confusing'
+    }
+  ];
+
 }
