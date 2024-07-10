@@ -1,6 +1,7 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { CardPlayerComponent } from "../card-player/card-player.component";
+import { TrackModel } from '@core/models/track.model';
 
 @Component({
     selector: 'app-generic-section',
@@ -22,6 +23,6 @@ export class GenericSectionComponent {
   @Input() mode: 'small' | 'big' = 'big'; // valor default = 'big'
 
   //input array for dataTracks
-  @Input() dataTracks: Array<any> = [];
+  @Input() dataTracks: Array<TrackModel> = [];
 
 }
