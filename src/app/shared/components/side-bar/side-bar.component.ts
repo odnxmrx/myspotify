@@ -1,12 +1,14 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar', //nombre de selector para utilizarlo
   standalone: true,
   imports: [
     NgFor,
-    NgClass
+    NgClass,
+    RouterLink
   ],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css'
@@ -44,7 +46,7 @@ export class SideBarComponent implements OnInit {
       {
         name: 'Home',
         icon: 'uil-estate',
-        router: ['/', 'auth']
+        router: ['/', '']
       },
       {
         name: 'Search',

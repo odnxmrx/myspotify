@@ -17,7 +17,7 @@ export class CardPlayerComponent {
   //default input 'mode' and 'track
   @Input() mode: 'small' | 'big' = 'small';
   //@Input() track!: TrackModel; //porque falta inicializar, el '!' lo ignora
-  @Input() track: TrackModel = {
+  @Input() track: TrackModel = { //initialize to its interface:
     _id: 0,
     name: '',
     album: '',
