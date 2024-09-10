@@ -1,6 +1,6 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar', //nombre de selector para utilizarlo
@@ -8,12 +8,28 @@ import { RouterLink } from '@angular/router';
   imports: [
     NgFor,
     NgClass,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css'
 })
+
+
 export class SideBarComponent implements OnInit {
+  
+  constructor(private router: Router) {}
+
+  goTo($event: any): void {
+    this.router.navigate(['/', 'favorites'],{
+      queryParams: {
+        key1: 'value1',
+        key2: 'value2'
+      }
+    })
+    console.log('el evento: ', $event);
+    
+  // throw new Error('Method not implemented.');
+  }
 
   //logica del coponente
   //public linksDeMenu: Array<any> = [];
@@ -51,7 +67,12 @@ export class SideBarComponent implements OnInit {
       {
         name: 'Search',
         icon: 'uil-search',
-        router: ['/', 'history']
+        router: ['/', 'history'] ,// -> http://localhost:4200/history
+        //router: ['/', 'history', 'detail'] sería -> http://localhost:4200/history/detail
+        query: {
+          key1: 'value1',
+          key2: 'value2'
+        }
       },
       {
         name: 'My Library',
