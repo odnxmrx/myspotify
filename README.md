@@ -1,5 +1,9 @@
 # Myspotify
 
+Project inspired by the _Spotify_ app. Where you can search and play music. Save to favorites and explore libraries.
+
+---
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
 
 ## Development server
