@@ -8,6 +8,7 @@ import { GenericSectionComponent } from './components/generic-section/generic-se
 import { PlayListHeaderComponent } from './components/play-list-header/play-list-header.component';
 import { PlayListBodyComponent } from './components/play-list-body/play-list-body.component';
 import { RouterModule } from '@angular/router';
+import { BrokenImgDirective } from './directives/broken-img.directive';
 
 @NgModule({
   declarations: [],
@@ -21,15 +22,18 @@ import { RouterModule } from '@angular/router';
     PlayListHeaderComponent,
     PlayListBodyComponent,
     RouterModule,
+    BrokenImgDirective,
   ],
-  exports: [ //array de declaracion compartidos (exportar)
+  exports: [
+    //array de declaracion compartidos (exportar)
     SideBarComponent,
     MediaPlayerComponent,
     HeaderUserComponent,
     CardPlayerComponent,
     GenericSectionComponent,
     PlayListHeaderComponent,
-    PlayListBodyComponent
-  ]
+    PlayListBodyComponent,
+    BrokenImgDirective,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
