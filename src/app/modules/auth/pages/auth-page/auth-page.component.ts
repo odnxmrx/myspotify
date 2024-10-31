@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '@modules/auth/services/auth.service';
 
 @Component({
   selector: 'app-auth-page',
@@ -14,6 +15,8 @@ import {
   styleUrl: './auth-page.component.css',
 })
 export class AuthPageComponent implements OnInit {
+  constructor(private _authService: AuthService) {}
+
   formLogin: FormGroup = new FormGroup({});
 
   ngOnInit(): void {
@@ -31,7 +34,8 @@ export class AuthPageComponent implements OnInit {
     });
   }
   sendLogin(): void {
-    const body = this.formLogin?.value; //toma lo que está en el form
+    const { email, password } = this.formLogin?.value; //toma lo que está en el form (en 'body')
     // console.log('BODYYYYYY => ', body);
+    this._authService.sendCretentials(email, password);
   }
 }
