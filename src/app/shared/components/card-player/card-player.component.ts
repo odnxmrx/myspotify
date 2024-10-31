@@ -2,6 +2,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TrackModel } from '@core/models/track.model';
 import { BrokenImgDirective } from '@shared/directives/broken-img.directive';
+import { MultimediaService } from '@shared/services/multimedia.service';
 
 @Component({
   selector: 'app-card-player',
@@ -11,6 +12,8 @@ import { BrokenImgDirective } from '@shared/directives/broken-img.directive';
   styleUrl: './card-player.component.css',
 })
 export class CardPlayerComponent {
+  constructor(private _multimediaService: MultimediaService) {}
+
   //default input 'mode' and 'track
   @Input() mode: 'small' | 'big' = 'small';
   //@Input() track!: TrackModel; //porque falta inicializar, el '!' lo ignora
@@ -23,4 +26,11 @@ export class CardPlayerComponent {
     duration: 22,
     url: '',
   };
+
+  //Método
+  sendPlay(track: TrackModel): void {
+    console.log("enviando 'track' a player....", track);
+
+    this._multimediaService.callback.emit(track);
+  }
 }

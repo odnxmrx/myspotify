@@ -15,7 +15,7 @@ import { AuthService } from '@modules/auth/services/auth.service';
   styleUrl: './auth-page.component.css',
 })
 export class AuthPageComponent implements OnInit {
-  constructor(private _authService: AuthService) {}
+  constructor(private _authService: AuthService) {} //lo agregamos en su constructor
 
   formLogin: FormGroup = new FormGroup({});
 
@@ -36,6 +36,6 @@ export class AuthPageComponent implements OnInit {
   sendLogin(): void {
     const { email, password } = this.formLogin?.value; //toma lo que está en el form (en 'body')
     // console.log('BODYYYYYY => ', body);
-    this._authService.sendCretentials(email, password);
+    this._authService.sendCretentials(email, password); //Enviamso los params al método del service
   }
 }
