@@ -5,114 +5,88 @@ import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-side-bar', //nombre de selector para utilizarlo
   standalone: true,
-  imports: [
-    NgFor,
-    NgClass,
-    RouterLink,
-  ],
+  imports: [NgFor, NgClass, RouterLink],
   templateUrl: './side-bar.component.html',
-  styleUrl: './side-bar.component.css'
+  styleUrl: './side-bar.component.css',
 })
-
-
 export class SideBarComponent implements OnInit {
-  
   constructor(private router: Router) {}
 
   goTo($event: any): void {
-    this.router.navigate(['/', 'favorites'],{
+    this.router.navigate(['/', 'favorites'], {
       queryParams: {
         key1: 'value1',
-        key2: 'value2'
-      }
-    })
+        key2: 'value2',
+      },
+    });
     console.log('el evento: ', $event);
-    
-  // throw new Error('Method not implemented.');
+
+    // throw new Error('Method not implemented.');
   }
 
   //logica del coponente
-  //public linksDeMenu: Array<any> = [];
-  
-  // linksDeMenu: Array<any> = [
-  //   {
-  //     name: 'Home',
-  //     icon: 'uil-estate'
-  //   },
-  //   {
-  //     name: 'Search',
-  //     icon: 'uil-estate'
-  //   },
-  //   {
-  //     name: 'My Library',
-  //     icon: 'uil-estate'
-  //   }
-  // ];
 
   //'mainMenu' -> obj de dos propiedades del tipo array
-  mainMenu: 
-    { defaultOptions: Array<any>, accessLink: Array<any> } 
-  = { defaultOptions: [], accessLink: [] } //TS necesita su inicialización (valor inicial); simplemente vacíos
+  mainMenu: { defaultOptions: Array<any>; accessLink: Array<any> } = {
+    defaultOptions: [],
+    accessLink: [],
+  }; //TS necesita su inicialización (valor inicial); simplemente vacíos
 
   customOptions: Array<any> = [];
 
   ngOnInit(): void {
-    
     this.mainMenu.defaultOptions = [
       {
         name: 'Home',
         icon: 'uil-estate',
-        router: ['/', '']
+        router: ['/', 'auth'],
       },
       {
         name: 'Search',
         icon: 'uil-search',
-        router: ['/', 'history'] ,// -> http://localhost:4200/history
+        router: ['/', 'tracks'], // -> http://localhost:4200/history
         //router: ['/', 'history', 'detail'] sería -> http://localhost:4200/history/detail
         query: {
           key1: 'value1',
-          key2: 'value2'
-        }
+          key2: 'value2',
+        },
       },
       {
         name: 'My Library',
         icon: 'uil-chart',
         router: ['/', 'favorites'],
-        query: { hola: 'mundo' }
-      }
-    ]
+        query: { hola: 'mundo' },
+      },
+    ];
 
     this.mainMenu.accessLink = [
       {
         name: 'Crear lista',
-        icon: 'uil-plus-square'
+        icon: 'uil-plus-square',
       },
       {
         name: 'Canciones que te gustan',
-        icon: 'uil-heart-medical'
-      }
-    ]
+        icon: 'uil-heart-medical',
+      },
+    ];
 
     this.customOptions = [
       {
         name: 'My List º1',
-        router: ['/']
+        router: ['/'],
       },
       {
         name: 'My List º2',
-        router: ['/']
+        router: ['/'],
       },
       {
         name: 'My List º3',
-        router: ['/']
+        router: ['/'],
       },
       {
         name: 'My List º4',
-        router: ['/']
-      }
-    ]
-
-
+        router: ['/'],
+      },
+    ];
   }
-
 }

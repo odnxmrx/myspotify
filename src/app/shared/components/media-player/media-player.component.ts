@@ -1,7 +1,8 @@
 import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/track.model';
 import { MultimediaService } from '@shared/services/multimedia.service';
+import { Subscription } from 'rxjs'; // Programación Reactiva
 
 @Component({
   selector: 'app-media-player',
@@ -10,17 +11,28 @@ import { MultimediaService } from '@shared/services/multimedia.service';
   templateUrl: './media-player.component.html',
   styleUrl: './media-player.component.css',
 })
-export class MediaPlayerComponent implements OnInit {
+export class MediaPlayerComponent implements OnInit, OnDestroy {
   constructor(private _multimediaService: MultimediaService) {}
+
+  //Observadores array
+  listObservers$: Array<Subscription> = [];
+
+  ngOnDestroy(): void {
+    // console.log('cOMPONENTE SE VA DESTRUIR, OnDestroy');
+    this.listObservers$.forEach((subs) => subs.unsubscribe()); //recorder array y quitar suscripcion
+  }
+
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
-    const observer1$ = this._multimediaService.callback.subscribe(
+    const observer1$: Subscription = this._multimediaService.callback.subscribe(
       //suscribir para escuchar a 'callback'
       (response: TrackModel) => {
         //respuesta de tipo TrackModel
         console.log('recibiendo track (en response)', response);
       }
     );
+    //Asigna valor a variable
+    this.listObservers$ = [observer1$];
   }
 
   mockCover: TrackModel = {
