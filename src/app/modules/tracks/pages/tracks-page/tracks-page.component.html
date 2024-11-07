@@ -1,7 +1,15 @@
 <div class="tracks-page">
   <!-- seccion TOP - cards de reproduccion pequenos -->
-  <app-generic-section [dataTracks]="mockTracksList" [title]="'Listen to the best music ever!'" [mode]="'small'" ></app-generic-section>
+  <app-generic-section
+    [dataTracks]="tracksListTrending"
+    [title]="'Listen to the best music ever!'"
+    [mode]="'small'"
+  ></app-generic-section>
 
   <!-- section BOTTOM - cards de reproduccion grandes, cuadrados -->
-  <app-generic-section [dataTracks]="mockTracksList" [title]="'Top tending playlist'" [mode]="'big'" ></app-generic-section>
+  <app-generic-section
+    [dataTracks]="tracksRandom"
+    [title]="'Top tending playlist'"
+    [mode]="'big'"
+  ></app-generic-section>
 </div>
