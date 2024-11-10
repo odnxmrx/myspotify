@@ -88,5 +88,14 @@ export class SideBarComponent implements OnInit {
         router: ['/'],
       },
     ];
+
+    //escuchar datarandom - y agregarlo a sidebar
+    // this._trackService.dataTracksRandom$.subscribe((response: any) => {
+    //   this.customOptions.push({
+    //     //Arreglo creado, sin estructra de Tracks
+    //     name: response[0].name,
+    //     router: [],
+    //   });
+    // });
   }
 }
