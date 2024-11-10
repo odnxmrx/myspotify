@@ -9,11 +9,13 @@ export const routes: Routes = [
   // }
   {
     path: 'auth',
-    loadChildren: () => import('./modules/auth/auth.module').then(module => module.AuthModule)
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then((module) => module.AuthModule),
   },
   {
     path: '', //en ruta raiz '/'
     component: HomePageComponent,
-    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
-  }
+    loadChildren: () =>
+      import('./modules/home/home.module').then((m) => m.HomeModule),
+  },
 ];

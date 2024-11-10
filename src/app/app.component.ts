@@ -5,8 +5,9 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
+  providers: [],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'myspotify';
@@ -30,13 +31,10 @@ export class AppComponent {
   //   {
   //     model: 'Camaro',
   //     brand: 'Chevrolet',
-      
+
   //   }
   // ]
-
-
 }
-
 
 //interface
 // interface MyCarModel {
