@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TrackModel } from '@core/models/track.model';
-import { map, Observable, of } from 'rxjs';
+import { map, mergeMap, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -41,12 +41,14 @@ export class TrackService {
   //Método Observable para random Trancks
   getAllRandom$(): Observable<any> {
     return this._httpClient.get(`${this.URI_API}/tracks`).pipe(
-      map(({ data }: any) => {
-        return data.reverse(); //array 'data' apply 'reverse'
-      })
+      mergeMap(
+        ({ data }: any) => this.skipById(data, 1)
+        //return data.reverse(); //array 'data' apply 'reverse'
+      ),
       // map((reversedData) => {
       //   return reversedData.filter((track: TrackModel) => track._id !== 1);
       // })
+      tap((data) => console.log("'data' desde pipe 'tap': ", data))
     );
   }
 }
