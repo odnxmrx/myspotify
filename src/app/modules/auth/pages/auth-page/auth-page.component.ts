@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
@@ -10,13 +11,14 @@ import { AuthService } from '@modules/auth/services/auth.service';
 @Component({
   selector: 'app-auth-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './auth-page.component.html',
   styleUrl: './auth-page.component.css',
 })
 export class AuthPageComponent implements OnInit {
   constructor(private _authService: AuthService) {} //lo agregamos en su constructor
 
+  errorSession: boolean = false; // error login flag
   formLogin: FormGroup = new FormGroup({});
 
   ngOnInit(): void {
@@ -36,6 +38,17 @@ export class AuthPageComponent implements OnInit {
   sendLogin(): void {
     const { email, password } = this.formLogin?.value; //toma lo que está en el form (en 'body')
     // console.log('BODYYYYYY => ', body);
-    this._authService.sendCretentials(email, password); //Enviamso los params al método del service
+    //Enviamso los params al método del service
+    this._authService.sendCretentials(email, password).subscribe(
+      (responseOk) => {
+        //Correct credentials - 200 OK
+        console.log('Sesión OK - Correcto');
+      },
+      (err) => {
+        // 400 Error
+        this.errorSession = true; // set flag to true
+        console.log('Error en credenciales');
+      }
+    );
   }
 }
