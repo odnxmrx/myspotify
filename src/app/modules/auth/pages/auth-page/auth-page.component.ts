@@ -7,16 +7,22 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '@modules/auth/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-auth-page',
   standalone: true,
   imports: [ReactiveFormsModule, NgIf],
+  providers: [CookieService],
   templateUrl: './auth-page.component.html',
   styleUrl: './auth-page.component.css',
 })
 export class AuthPageComponent implements OnInit {
-  constructor(private _authService: AuthService) {} //lo agregamos en su constructor
+  //agregamos 'service' en constructor
+  constructor(
+    private _authService: AuthService,
+    private _cookie: CookieService
+  ) {}
 
   errorSession: boolean = false; // error login flag
   formLogin: FormGroup = new FormGroup({});
@@ -42,7 +48,10 @@ export class AuthPageComponent implements OnInit {
     this._authService.sendCretentials(email, password).subscribe(
       (responseOk) => {
         //Correct credentials - 200 OK
-        console.log('Sesión OK - Correcto');
+        console.log('Sesión OK - Correcto', responseOk);
+        // ResponseOk {data: {}, tokenSession: 'kfjdkljfdljds'}
+        const { tokenSession, data } = responseOk;
+        this._cookie.set('token', tokenSession, 4, '/');
       },
       (err) => {
         // 400 Error
