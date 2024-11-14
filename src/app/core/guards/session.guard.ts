@@ -12,13 +12,12 @@ export const sessionGuard: CanActivateFn = (route, state) => {
 
   try {
     const token = cookieService.check('token');
-    console.log('respuesta de "token": ', token);
-    if (token) {
-      return true;
-    } else {
+    // console.log('respuesta de "token": ', token);
+
+    if (!token) {
       router.navigate(['/', 'auth']);
-      return false;
     }
+    return token;
   } catch (error) {
     console.log('Ocurrió error en session guard.');
     return false;
