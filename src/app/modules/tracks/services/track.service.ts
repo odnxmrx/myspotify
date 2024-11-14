@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TrackModel } from '@core/models/track.model';
-import { map, mergeMap, Observable, of, tap } from 'rxjs';
+import { catchError, map, mergeMap, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -48,7 +48,13 @@ export class TrackService {
       // map((reversedData) => {
       //   return reversedData.filter((track: TrackModel) => track._id !== 1);
       // })
-      tap((data) => console.log("'data' desde pipe 'tap': ", data))
+      tap((data) => console.log("'data' desde pipe 'tap': ", data)),
+      catchError((err) => {
+        console.log('Entró a catch Error', err);
+        // const {status, statusText} = err;
+        // console.log('Error: ', [status, statusText]);
+        return of([]);
+      })
     );
   }
 }
