@@ -4,10 +4,6 @@ import { HomePageComponent } from '@modules/home/pages/home-page/home-page.compo
 // import { ExampleComponent } from './example/example.component';
 
 export const routes: Routes = [
-  // {
-  //   path: '', // referencia a /
-  //   component: ExampleComponent
-  // }
   {
     path: 'auth',
     loadChildren: () =>

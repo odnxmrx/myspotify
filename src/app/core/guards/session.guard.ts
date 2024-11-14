@@ -6,10 +6,6 @@ export const sessionGuard: CanActivateFn = (route, state) => {
   const cookieService = inject(CookieService);
   const router = inject(Router);
 
-  // checkCookieSesion(): boolean {
-  //   return true;
-  // }
-
   try {
     const token = cookieService.check('token');
     // console.log('respuesta de "token": ', token);
@@ -22,5 +18,4 @@ export const sessionGuard: CanActivateFn = (route, state) => {
     console.log('Ocurrió error en session guard.');
     return false;
   }
-  // return cookieService; // true/false?
 };
