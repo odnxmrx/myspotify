@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@modules/auth/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -21,7 +22,8 @@ export class AuthPageComponent implements OnInit {
   //agregamos 'service' en constructor
   constructor(
     private _authService: AuthService,
-    private _cookie: CookieService
+    private _cookie: CookieService,
+    private _router: Router
   ) {}
 
   errorSession: boolean = false; // error login flag
@@ -41,6 +43,7 @@ export class AuthPageComponent implements OnInit {
       ]),
     });
   }
+
   sendLogin(): void {
     const { email, password } = this.formLogin?.value; //toma lo que está en el form (en 'body')
     // console.log('BODYYYYYY => ', body);
@@ -51,7 +54,8 @@ export class AuthPageComponent implements OnInit {
         console.log('Sesión OK - Correcto', responseOk);
         // ResponseOk {data: {}, tokenSession: 'kfjdkljfdljds'}
         const { tokenSession, data } = responseOk;
-        this._cookie.set('token', tokenSession, 4, '/');
+        this._cookie.set('token', tokenSession, 4, '/'); // set cookie
+        this._router.navigate(['/', 'tracks']); // go to page /tracks
       },
       (err) => {
         // 400 Error
