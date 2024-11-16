@@ -1,44 +1,22 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { injectSessionInterceptor } from '@core/interceptors/inject-session.interceptor';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  providers: [],
+  providers: [
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: injectSessionInterceptor,
+    //   multi: true,
+    // },
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'myspotify';
-
-  //ejemplo de tipo de dato:
-  // miDato: string | boolean = true;
-
-  // car: MyCarModel = {
-  // //car: any = {
-  //   model: 'Civic',
-  //   brand: 'Honda',
-  //   year: 2024
-  // };
-
-  // listCars: Array<MyCarModel> = [
-  //   {
-  //     model: 'Focus',
-  //     brand: 'Ford',
-  //     year: 2021
-  //   },
-  //   {
-  //     model: 'Camaro',
-  //     brand: 'Chevrolet',
-
-  //   }
-  // ]
 }
-
-//interface
-// interface MyCarModel {
-//   model: string;
-//   brand: string;
-//   year?: number; //? is optional
-// }
