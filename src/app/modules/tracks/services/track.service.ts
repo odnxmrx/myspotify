@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TrackModel } from '@core/models/track.model';
 import { catchError, map, mergeMap, Observable, of, tap } from 'rxjs';
@@ -29,13 +29,20 @@ export class TrackService {
   // '$' indica que es un Observable
   getAllTracks$(): Observable<any> {
     //debo retornar observable
-    return this._httpClient.get(`${this.URI_API}/tracks`).pipe(
-      //la request retorna obj data { data: [ objtrack1, objtrack2, ...]}
-      map(({ data }: any) => {
-        //haciendo destructuring
-        return data; // retornar solo 'data'
-      })
-    );
+    return this._httpClient
+      .get(
+        `${this.URI_API}/tracks`
+        // ,{
+        // headers: new HttpHeaders({ authorization: 'Bearer TOKENN' }),
+        // }
+      )
+      .pipe(
+        //la request retorna obj data { data: [ objtrack1, objtrack2, ...]}
+        map(({ data }: any) => {
+          //haciendo destructuring
+          return data; // retornar solo 'data'
+        })
+      );
   }
 
   //Método Observable para random Trancks
