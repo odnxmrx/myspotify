@@ -19,7 +19,7 @@ export class SideBarComponent implements OnInit {
         key2: 'value2',
       },
     });
-    console.log('el evento: ', $event);
+    // console.log('el evento: ', $event);
 
     // throw new Error('Method not implemented.');
   }
@@ -44,7 +44,7 @@ export class SideBarComponent implements OnInit {
       {
         name: 'Search',
         icon: 'uil-search',
-        router: ['/', 'tracks'], // -> http://localhost:4200/history
+        router: ['/', 'history'], // -> http://localhost:4200/history
         //router: ['/', 'history', 'detail'] sería -> http://localhost:4200/history/detail
         query: {
           key1: 'value1',
@@ -67,6 +67,7 @@ export class SideBarComponent implements OnInit {
       {
         name: 'Canciones que te gustan',
         icon: 'uil-heart-medical',
+        router: ['/', 'favorites'],
       },
     ];
 
