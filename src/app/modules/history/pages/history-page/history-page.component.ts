@@ -9,4 +9,9 @@ import { PlayListBodyComponent } from '@shared/components/play-list-body/play-li
   templateUrl: './history-page.component.html',
   styleUrl: './history-page.component.css',
 })
-export class HistoryPageComponent {}
+export class HistoryPageComponent {
+  // funcion que manejará lo que recibe del hijo
+  receiveData(event: string): void {
+    console.log('dato obtenido de componente hijo: ', event);
+  }
+}
