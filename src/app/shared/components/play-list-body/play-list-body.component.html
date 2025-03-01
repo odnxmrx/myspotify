@@ -1,27 +1,33 @@
 <div class="play-list-body">
   <ul class="play-list-table-header">
-      <li (click)="changeSort('name')">Nombre ❤</li>
-      <li (click)="changeSort('album')">álbum 🆗</li>
-      <li>fecha agregado</li>
-      <li><i class="uil uil-clock-eight"></i></li>
+    <li (click)="changeSort('name')">Nombre ❤</li>
+    <li (click)="changeSort('album')">álbum 🆗</li>
+    <li>fecha agregado</li>
+    <li><i class="uil uil-clock-eight"></i></li>
   </ul>
 
   <!-- el * significa que son Directivas ESTRUCTURALES: afectan la estructura del HTML -->
-  <ul class="play-list-rows" *ngFor="let track of tracks | orderList:optionSort.property:optionSort.order">
-      <li class="track-name">
-          <ng-container *ngTemplateOutlet="coverSection;context:{track:track}"></ng-container>
-          <!-- las variables del obj 'context' estan disponibles para declaraciones 'let' del template -->
-        </li>
-      <li class="track-name-opacity">
-          {{track.album}}
-      </li>
-      <li class="track-name-opacity">
-          {{track.album}}
-      </li>
-      <li class="track-name-opacity">
-          {{track.album}}
-      </li>
-
+  <ul
+    class="play-list-rows"
+    *ngFor="
+      let track of tracks | orderList : optionSort.property : optionSort.order
+    "
+  >
+    <li class="track-name">
+      <ng-container
+        *ngTemplateOutlet="coverSection; context: { track: track }"
+      ></ng-container>
+      <!-- las variables del obj 'context' estan disponibles para declaraciones 'let' del template -->
+    </li>
+    <li class="track-name-opacity">
+      {{ track.album }}
+    </li>
+    <li class="track-name-opacity">
+      {{ track.album }}
+    </li>
+    <li class="track-name-opacity">
+      {{ track.album }}
+    </li>
   </ul>
 </div>
 
@@ -31,11 +37,15 @@
       que recibe el valor que hay en el obj. 'context'-->
 
   <div class="cover-section">
-      <img appImgBroken class="cover-track" [src]="trackContext.cover" [alt]="trackContext.name">
-      <div class="cover-info">
-          <div class="name-track">{{trackContext.name}}</div>
-          <div class="name-track-details">{{trackContext.artist.name}}</div>
-      </div>
+    <img
+      appImgBroken
+      class="cover-track"
+      [src]="trackContext.cover"
+      [alt]="trackContext.name"
+    />
+    <div class="cover-info">
+      <div class="name-track">{{ trackContext.name }}</div>
+      <div class="name-track-details">{{ trackContext.artist.name }}</div>
+    </div>
   </div>
-
 </ng-template>
