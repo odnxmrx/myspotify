@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,25 +12,29 @@ export class MultimediaService {
         emit()
   */
 
-  myObservable1$: Observable<any> = new Observable();
+  // myObservable1$: Observable<any> = new Observable();
+  // myObservable1$: Subject<any> = new Subject();
+  myObservable1$: BehaviorSubject<any> = new BehaviorSubject('inicializado');
 
   constructor() {
-    // práctica; inicializamos observable1
-    this.myObservable1$ = new Observable((observer: Observer<any>) => {
-      // función que recibe 'observer'
-      observer.next('gluglugluuuuu');
+    setTimeout(() => {
+      // para poder visualizarlo en suscripción hecha en OnInit
+      this.myObservable1$.next('wow');
+    }, 1000);
 
-      setTimeout(() => {
-        observer.complete(); // finalizar/completar la suscripción
-      }, 4000);
-
-      setTimeout(() => {
-        observer.next('yup');
-      }, 2500);
-
-      setTimeout(() => {
-        observer.error('yup');
-      }, 3500);
-    });
+    // // práctica; inicializamos observabl e1
+    // this.myObservable1$ = new Observable((observer: Observer<any>) => {
+    //   // función que recibe 'observer'
+    //   observer.next('gluglugluuuuu');
+    //   setTimeout(() => {
+    //     observer.complete(); // finalizar/completar la suscripción
+    //   }, 4000);
+    //   setTimeout(() => {
+    //     observer.next('yup');
+    //   }, 2500);
+    //   setTimeout(() => {
+    //     observer.error('yup');
+    //   }, 3500);
+    // });
   }
 }
