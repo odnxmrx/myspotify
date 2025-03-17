@@ -33,6 +33,16 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     );
     //Asigna valor a variable
     this.listObservers$ = [observer1$];
+
+    // Nos suscribimos al servicio
+    const observable1$ = this._multimediaService.myObservable1$.subscribe(
+      (responseOk) => {
+        console.log('Suscripción a myObservable1 exitosa!', responseOk);
+      },
+      (responseError) => {
+        console.log('Ocurrió error en suscripción');
+      }
+    );
   }
 
   mockCover: TrackModel = {
