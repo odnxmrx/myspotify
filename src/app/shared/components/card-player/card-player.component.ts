@@ -29,8 +29,6 @@ export class CardPlayerComponent {
 
   //Método
   sendPlay(track: TrackModel): void {
-    console.log("enviando 'track' a player....", track);
-
-    this._multimediaService.callback.emit(track);
+    this._multimediaService.trackInfo$.next(track);
   }
 }
