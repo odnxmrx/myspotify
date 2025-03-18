@@ -20,6 +20,9 @@ export class MultimediaService {
   public trackInfo$: BehaviorSubject<any> = new BehaviorSubject(undefined);
 
   public timeElapsed$: BehaviorSubject<string> = new BehaviorSubject('00:00');
+  public timeRemaining$: BehaviorSubject<string> = new BehaviorSubject(
+    '-00:00'
+  );
 
   constructor() {
     this.audio = new Audio(); // inicializamos 'audio' de la clase 'Audio'
@@ -52,6 +55,7 @@ export class MultimediaService {
     const { duration, currentTime } = this.audio; // destructuring del HTML Audio
     // console.table([duration, currentTime]);
     this.setTimeElapsed(currentTime);
+    this.setTimeRemaining(duration, currentTime);
   };
 
   // calcula tiempo transcurrido
@@ -64,5 +68,18 @@ export class MultimediaService {
 
     const displayFullFormat = `${displayMinutes}:${displaySeconds}`;
     this.timeElapsed$.next(displayFullFormat);
+  }
+
+  private setTimeRemaining(currentTime: number, duration: number): void {
+    let timeLeft = Math.abs(duration - currentTime);
+
+    let seconds = Math.floor(timeLeft % 60); // Obtener segundos sin decimales
+    let minutes = Math.floor((timeLeft / 60) % 60); // dividimos entre 60, para obener min.
+
+    const displaySeconds = seconds < 10 ? `${seconds}` : seconds;
+    const displayMinutes = minutes < 10 ? `${minutes}` : minutes;
+
+    const displayFullFormat = `-${displayMinutes}:${displaySeconds}`;
+    this.timeRemaining$.next(displayFullFormat);
   }
 }
