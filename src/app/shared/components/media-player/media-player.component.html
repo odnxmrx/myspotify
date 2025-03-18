@@ -49,7 +49,7 @@
       </button>
     </div>
     <div class="media-linetime">
-      <div class="time">00:0</div>
+      <div class="time">{{ _multimediaService.timeElapsed$ | async }}</div>
       <span #progressBar class="time-progress">
         <span class="time-progress-live" [style.width]="10 + '%'"> </span>
       </span>
