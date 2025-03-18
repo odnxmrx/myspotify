@@ -23,6 +23,7 @@ export class MultimediaService {
   public timeRemaining$: BehaviorSubject<string> = new BehaviorSubject(
     '-00:00'
   );
+  public playerStatus$: BehaviorSubject<string> = new BehaviorSubject('paused');
 
   constructor() {
     this.audio = new Audio(); // inicializamos 'audio' de la clase 'Audio'
@@ -42,11 +43,20 @@ export class MultimediaService {
     this.audio.play();
   }
 
+  public togglePlayer(): void {
+    // ejecutando métodos de HTML Audio
+    this.audio.paused ? this.audio.play() : this.audio.pause();
+  }
+
   // Funciones privadas
 
   private listenAllEvents(): void {
     // agregamos evento
     this.audio.addEventListener('timeupdate', this.calculateTime); // 2do param es la arrow fn
+    this.audio.addEventListener('playing', this.setPlayerStatus);
+    this.audio.addEventListener('play', this.setPlayerStatus);
+    this.audio.addEventListener('pause', this.setPlayerStatus);
+    this.audio.addEventListener('ended', this.setPlayerStatus);
   }
 
   // El evento escuchador
@@ -82,4 +92,25 @@ export class MultimediaService {
     const displayFullFormat = `-${displayMinutes}:${displaySeconds}`;
     this.timeRemaining$.next(displayFullFormat);
   }
+
+  // Eventos de Pause & Play
+  private setPlayerStatus = (state: any): void => {
+    // console.log('el estado::::::::::.', state);
+
+    // switch que toma el estado
+    switch (state.type) {
+      case 'play':
+        this.playerStatus$.next('play');
+        break;
+      case 'playing':
+        this.playerStatus$.next('playing');
+        break;
+      case 'ended':
+        this.playerStatus$.next('ended');
+        break;
+      default:
+        this.playerStatus$.next('paused');
+        break;
+    }
+  };
 }

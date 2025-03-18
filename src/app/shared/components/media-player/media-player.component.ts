@@ -16,6 +16,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
 
   //Observadores array
   listObservers$: Array<Subscription> = [];
+  myState: string = 'paused';
 
   ngOnDestroy(): void {
     this.listObservers$.forEach((subs) => subs.unsubscribe()); //recorder array y quitar suscripcion
@@ -23,6 +24,11 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this._multimediaService.trackInfo$
+    const observer1$ = this._multimediaService.playerStatus$.subscribe(
+      (status) => (this.myState = status)
+    );
+
+    this.listObservers$ = [observer1$]; // de-suscribrir al destruir comp
   }
 
   // mockCover!: TrackModel;
