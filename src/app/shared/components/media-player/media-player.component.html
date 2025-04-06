@@ -56,9 +56,14 @@
       </button>
     </div>
     <div class="media-linetime">
+      <!-- <div>{{ _multimediaService.playerProgress$ | async }}</div> -->
       <div class="time">{{ _multimediaService.timeElapsed$ | async }}</div>
-      <span #progressBar class="time-progress">
-        <span class="time-progress-live" [style.width]="10 + '%'"> </span>
+      <span #progressBar (click)="handlePosition($event)" class="time-progress">
+        <span
+          class="time-progress-live"
+          [style.width]="(_multimediaService.playerProgress$ | async) + '%'"
+        >
+        </span>
       </span>
       <div class="time">{{ _multimediaService.timeRemaining$ | async }}</div>
     </div>

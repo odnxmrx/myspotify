@@ -24,6 +24,7 @@ export class MultimediaService {
     '-00:00'
   );
   public playerStatus$: BehaviorSubject<string> = new BehaviorSubject('paused');
+  public playerProgress$: BehaviorSubject<number> = new BehaviorSubject(0);
 
   constructor() {
     this.audio = new Audio(); // inicializamos 'audio' de la clase 'Audio'
@@ -48,6 +49,17 @@ export class MultimediaService {
     this.audio.paused ? this.audio.play() : this.audio.pause();
   }
 
+  public seekAudio(percentage: number): void {
+    const { duration } = this.audio;
+    // console.log('la duracioooon: ', duration);
+    // console.log('el porcnejate: ', percentage);
+
+    // calculamos el porcentaje en segundos de la cancion donde se hizo clic ('percentage')
+    const percentageToSecond = (duration * percentage) / 100;
+    console.log('percentageToSecond ', percentageToSecond);
+    this.audio.currentTime = percentageToSecond;
+  }
+
   // Funciones privadas
 
   private listenAllEvents(): void {
@@ -66,6 +78,7 @@ export class MultimediaService {
     // console.table([duration, currentTime]);
     this.setTimeElapsed(currentTime);
     this.setTimeRemaining(duration, currentTime);
+    this.setProgress(duration, currentTime);
   };
 
   // calcula tiempo transcurrido
@@ -113,4 +126,15 @@ export class MultimediaService {
         break;
     }
   };
+
+  // calcula barra de progreso
+  private setProgress(duration: number, currentTime: number) {
+    // Aplicamos regla de tres
+    // duration --------> el 100 % del progreso
+    // currentTime -----> (X)
+
+    // currentTime x 100 / duration
+    let percentage = (currentTime * 100) / duration;
+    this.playerProgress$.next(percentage);
+  }
 }
